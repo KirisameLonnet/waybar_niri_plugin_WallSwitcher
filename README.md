@@ -108,8 +108,11 @@ mkdir -p ~/Videos/WallVideo
 
 注意：
 
-- 片段里的路径按当前机器写成了 `/home/lonnet/...`
-- 如果安装目标不是这个用户，请把片段里的绝对路径改成你自己的家目录路径
+- 带有绝对路径的内容只出现在下面两个片段里：
+- `snippets/niri-config.kdl.snippet` 的第 `10` 行，以及第 `13` 到 `15` 行
+- `snippets/waybar-modules.jsonc.snippet` 的第 `4` 行和第 `8` 行
+- 这些行当前按本机路径写成了 `/home/lonnet/...`
+- 如果安装目标不是这个用户，请把这些行里的绝对路径改成你自己的家目录路径
 
 ### 5. 重载配置
 
