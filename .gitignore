@@ -1,0 +1,13 @@
+# 编辑器和系统垃圾
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# 本地测试缓存
+.idea/
+.vscode/
+
+# 运行时生成文件
+*.log
