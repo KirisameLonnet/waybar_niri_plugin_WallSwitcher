@@ -32,7 +32,6 @@
 - 图片请放到 `~/Pictures/Wallpaper`
 - 视频请放到 `~/Videos/WallVideo`
 - 目录名大小写不敏感，例如 `Wallpaper`、`wallpaper`、`WALLPAPER` 都可以被识别
-- 只接受 `Wallpaper` 这个单词，不再兼容 `WallPapper`、`wallpapper` 这类错误拼写
 - `WallVideo` 同样支持大小写变体，例如 `WallVideo`、`wallvideo`、`WALLVIDEO`
 
 ## 依赖
