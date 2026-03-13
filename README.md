@@ -32,6 +32,8 @@
 - `WallPapper` 的拼写就是这样，安装后请直接使用这个目录名
 - 图片请放到 `~/Pictures/WallPapper`
 - 视频请放到 `~/Videos/WallVideo`
+- 脚本会对这两个资源目录做大小写不敏感匹配
+- 例如 `WallPapper`、`wallpapper`、`WALLPAPPER`，以及 `WallVideo`、`wallvideo`、`WALLVIDEO` 都可以被识别
 
 ## 依赖
 
@@ -154,10 +156,6 @@ waybar &
 ```
 
 - 当前实现只支持从上述两个固定目录读取资源
-
-## 建议
-
-如果你打算把这个插件分发给别人，建议连同你自己的 Waybar 样式一起整理一份示例配置，这样安装者不用自己猜模块摆放位置。
 
 ## 许可证
 
