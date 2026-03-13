@@ -24,16 +24,16 @@
 
 插件只读取以下两个目录：
 
-- `~/Pictures/WallPapper`
+- `~/Pictures/Wallpaper`
 - `~/Videos/WallVideo`
 
 注意：
 
-- `WallPapper` 的拼写就是这样，安装后请直接使用这个目录名
-- 图片请放到 `~/Pictures/WallPapper`
+- 图片请放到 `~/Pictures/Wallpaper`
 - 视频请放到 `~/Videos/WallVideo`
-- 脚本会对这两个资源目录做大小写不敏感匹配
-- 例如 `WallPapper`、`wallpapper`、`WALLPAPPER`，以及 `WallVideo`、`wallvideo`、`WALLVIDEO` 都可以被识别
+- 目录名大小写不敏感，例如 `Wallpaper`、`wallpaper`、`WALLPAPER` 都可以被识别
+- 只接受 `Wallpaper` 这个单词，不再兼容 `WallPapper`、`wallpapper` 这类错误拼写
+- `WallVideo` 同样支持大小写变体，例如 `WallVideo`、`wallvideo`、`WALLVIDEO`
 
 ## 依赖
 
@@ -83,7 +83,7 @@ chmod +x ~/.config/waybar/modules/wallpaper-switcher.sh
 ### 2. 创建资源目录
 
 ```bash
-mkdir -p ~/Pictures/WallPapper
+mkdir -p ~/Pictures/Wallpaper
 mkdir -p ~/Videos/WallVideo
 ```
 
@@ -150,7 +150,7 @@ waybar &
 
 ## 注意事项
 
-- 如果 `~/Pictures/WallPapper` 里没有图片，菜单里就不会出现静态图片项
+- 如果 `~/Pictures/Wallpaper` 里没有图片，菜单里就不会出现静态图片项
 - 如果 `~/Videos/WallVideo` 里没有视频，菜单里就不会出现视频项
 - 自动模式下生成的模糊图会缓存在：
 
@@ -158,7 +158,7 @@ waybar &
 ~/.config/waybar/cache/wallpaper-switcher
 ```
 
-- 当前实现只支持从上述两个固定目录读取资源
+- 当前实现只支持从上述两个固定目录读取资源，目录路径不通过配置文件改写
 
 ## 许可证
 

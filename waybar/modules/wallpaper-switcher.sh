@@ -36,10 +36,71 @@ expand_path() {
   esac
 }
 
+join_path() {
+  local base="${1}"
+  local part="${2}"
+  if [[ "${base}" == "/" ]]; then
+    printf '/%s\n' "${part}"
+    return
+  fi
+  printf '%s/%s\n' "${base}" "${part}"
+}
+
+resolve_directory_case_insensitive() {
+  local requested_path="${1}"
+  local normalized_path
+  local current
+  local segment
+  local next_path
+  local matched_segment
+
+  normalized_path="$(expand_path "${requested_path}")"
+  if [[ -d "${normalized_path}" ]]; then
+    printf '%s\n' "${normalized_path}"
+    return
+  fi
+
+  if [[ "${normalized_path}" == /* ]]; then
+    current="/"
+    normalized_path="${normalized_path#/}"
+  else
+    current="."
+  fi
+
+  IFS='/' read -r -a path_segments <<< "${normalized_path}"
+  for segment in "${path_segments[@]}"; do
+    [[ -n "${segment}" ]] || continue
+
+    next_path="$(join_path "${current}" "${segment}")"
+    if [[ -d "${next_path}" ]]; then
+      current="${next_path}"
+      continue
+    fi
+
+    matched_segment=""
+    if [[ -d "${current}" ]]; then
+      while IFS= read -r candidate_name; do
+        if [[ "${candidate_name,,}" == "${segment,,}" ]]; then
+          matched_segment="${candidate_name}"
+          break
+        fi
+      done < <(find "${current}" -maxdepth 1 -mindepth 1 -type d -printf '%f\n' 2>/dev/null | sort)
+    fi
+
+    if [[ -n "${matched_segment}" ]]; then
+      current="$(join_path "${current}" "${matched_segment}")"
+    else
+      current="${next_path}"
+    fi
+  done
+
+  printf '%s\n' "${current}"
+}
+
 STATE_FILE="$(expand_path "$(config_get '.state_file // "~/.config/waybar/wallpaper-switcher.state.json"')")"
 CACHE_DIR="$(expand_path "$(config_get '.cache_dir // "~/.cache/niri-wallpaper-switcher"')")"
-WALLPAPER_DIR="$(expand_path "$(config_get '.wallpaper_dir // "~/Pictures/WallPapper"')")"
-VIDEO_DIR="$(expand_path "$(config_get '.video_dir // "~/Videos/WallVideo"')")"
+WALLPAPER_DIR="$(resolve_directory_case_insensitive "~/Pictures/Wallpaper")"
+VIDEO_DIR="$(resolve_directory_case_insensitive "~/Videos/WallVideo")"
 WAYBAR_SIGNAL="$(config_get '.signal // 9')"
 
 ensure_directories() {
