@@ -1,0 +1,12 @@
+{
+  "signal": 9,
+  "state_file": "~/.config/waybar/wallpaper-switcher.state.json",
+  "cache_dir": "~/.config/waybar/cache/wallpaper-switcher",
+  "wallpaper_dir": "~/Pictures/WallPapper",
+  "video_dir": "~/Videos/WallVideo",
+  "menu": {
+    "prompt": "Wallpaper> ",
+    "lines": 14,
+    "width": 54
+  }
+}
